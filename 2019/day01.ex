@@ -9,16 +9,11 @@ defmodule Day01 do
   end
 
   def calc_fuel([], acc) do acc end
+  def calc_fuel([h|_], acc) when h <= 6 do acc end
   def calc_fuel([h|t], acc) do
-    accum = calc_sub_fuel([Integer.floor_div(h, 3) - 2], acc + (Integer.floor_div(h, 3) - 2))
-    calc_fuel(t, accum)
+    sub_acc = calc_fuel([Integer.floor_div(h, 3) - 2], acc + (Integer.floor_div(h, 3) - 2))
+    calc_fuel(t, sub_acc)
   end
-
-  def calc_sub_fuel([h|_], acc) when h <= 6 do acc end
-  def calc_sub_fuel([h|_], acc) do 
-    calc_sub_fuel([Integer.floor_div(h, 3) - 2], acc + (Integer.floor_div(h, 3) - 2))
-  end
-
 
   def string_to_int([]) do [] end
   def string_to_int([h|t]) do
